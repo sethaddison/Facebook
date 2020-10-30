@@ -1,0 +1,47 @@
+<div class="card shadow-sm mt-3">
+  <div class="card-body">
+    <h5 class="d-inline"> <%= @post.user.name %> </h5>
+    <% if @post.user == current_user %>
+      <a class="float-right" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-ellipsis-h text-muted"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <%= link_to 'Edit', edit_post_path(@post), class: "dropdown-item" %>
+        <%= link_to 'Delete', post_path(@post), method: :delete, class: "dropdown-item",
+            data: { confirm: "Are you sure?"}%>
+      </div>
+    <% end %>
+
+    <p class="small"> <%= @post.created_at.strftime('%b %e at %l:%M %p') %> </p>
+    <p class="mb-4"> <%= @post.body %> </p>
+    <hr>
+    <% if @post.likers.include?(current_user) %>
+      <%= link_to unlike_post_path(@post), class: "text-decoration-none text-dark" do %>
+        <i class="fas fa-thumbs-up text-primary"></i> <%= pluralize(@post.likers.count, 'like') %>
+      <% end %>
+    <% else %>
+      <%= link_to like_post_path(@post), class: "text-decoration-none text-dark" do %>
+        <i class="far fa-thumbs-up"></i> <%= pluralize(@post.likers.count, 'like') %>
+        <% end %>
+    <% end %>
+  </div>
+
+
+
+  <div class="card-footer pb-4 pt-4">
+    <% if @post.comments.any? %>
+      <% @post.comments.each do |comment| %>
+        <p>
+          <%= link_to comment.user.name, user_path(comment.user), class: "h6 text-dark" %>
+          <%= comment.body %>
+          <% if comment.user == current_user %>
+            <%= link_to [comment.post, comment], method: :delete do %>
+              <i class="far fa-trash-alt text-muted text-decoration-none float-right"></i>
+            <% end %>
+          <% end %>
+        </p>
+      <% end %>
+    <% end %>
+    <%= render 'comments/form' %>
+  </div>
+</div>

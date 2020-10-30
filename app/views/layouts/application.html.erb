@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facebook</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+
+  <body class="mb-5">
+    <%= render 'layouts/navbar' %>
+    <% if signed_in? %>
+      <div class="container mt-5">
+        <%= render_flash_messages dismissible: true %>
+        <div class="row">
+          <div class="col-md-3">
+            <%= render 'layouts/sidebar' %>
+          </div>
+          <div class="col-md-9">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+    <div class="container mt-5">
+      <%= yield %>
+    </div>
+    <% end %>
+  </body>
+</html>

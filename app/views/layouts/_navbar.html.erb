@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-white shadow-sm">
+  <div class="container">
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <i class="fab fa-facebook text-primary fa-lg"></i>
+    <% end %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+        </li>
+      </ul>
+      <span class="navbar-nav">
+        <% if user_signed_in? %>
+          <%= link_to "Account", edit_user_registration_path, class: "nav-item nav-link" %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-item nav-link" %>
+        <% else %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "nav-item nav-link" %>
+          <%= link_to "Login", new_user_session_path, class: "nav-item nav-link" %>
+        <% end %>
+      </span>
+    </div>
+  </div>
+</nav>

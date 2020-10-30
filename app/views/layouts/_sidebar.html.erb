@@ -1,0 +1,13 @@
+<div class="row">
+  <nav class="nav flex-column">
+    <%= link_to posts_path, class: "nav-link" do %>
+    <h6 class="text-dark"><i class="fas fa-th-large text-primary fa-lg mr-2"></i> Posts </h6>
+    <% end %>
+    <%= link_to users_path, class: "nav-link" do %>
+    <h6 class="text-dark"><i class="fas fa-user-friends text-primary fa-lg mr-1"></i> Friends </h6>
+    <% end %>
+    <%= link_to user_path(current_user), class: "nav-link" do %>
+    <h6 class="text-dark"><i class="fas fa-user-circle text-primary fa-lg mr-2"></i> Profile  </h6>
+    <% end %>
+  </nav>
+</div>
